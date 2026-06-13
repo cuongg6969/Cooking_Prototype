@@ -1,37 +1,29 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
 
 public static class EventBus
 {
-    private static Dictionary<Type, Delegate> events = new Dictionary<Type, Delegate>();
+    static readonly Dictionary<Type, List<Delegate>> _subscribers = new();
 
-    public static void Subscribe<T>(Action<T> listener)
+    public static void Subscribe<T>(Action<T> handler) where T : struct
     {
-        if (events.TryGetValue(typeof(T), out var existing))
-        {
-            events[typeof(T)] = Delegate.Combine(existing, listener);
-        }
-        else
-        {
-            events[typeof(T)] = listener;
-        }
+        var type = typeof(T);
+        if (!_subscribers.ContainsKey(type))
+            _subscribers[type] = new List<Delegate>();
+        _subscribers[type].Add(handler);
     }
 
-    public static void Unsubscribe<T>(Action<T> listener)
+    public static void Unsubscribe<T>(Action<T> handler) where T : struct
     {
-        if (events.TryGetValue(typeof(T), out var existing))
-        {
-            events[typeof(T)] = Delegate.Remove(existing, listener);
-        }
+        if (_subscribers.TryGetValue(typeof(T), out var list))
+            list.Remove(handler);
     }
 
-    public static void Publish<T>(T eventData)
+    public static void Publish<T>(T eventData) where T : struct
     {
-        if (events.TryGetValue(typeof(T), out var del))
-        {
-            ((Action<T>)del)?.Invoke(eventData);
-        }
+        if (!_subscribers.TryGetValue(typeof(T), out var list)) return;
+
+        foreach (var handler in list.ToArray())
+            ((Action<T>)handler)?.Invoke(eventData);
     }
 }

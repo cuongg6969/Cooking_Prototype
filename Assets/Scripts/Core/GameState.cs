@@ -3,8 +3,9 @@ using UnityEngine;
 public enum GameState
 {
     World,
-    Combat, 
+    Combat,
     Cooking,
     Restaurant,
+    Dialogue,
     Pause
 }

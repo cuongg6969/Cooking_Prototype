@@ -6,6 +6,13 @@ public class Entity : MonoBehaviour
     [SerializeField] protected int maxHp;
     [SerializeField] protected int currentHp;
 
+    [Header("Combat")]
+    [SerializeField] protected int physicalAttack;
+    [SerializeField] protected int magicAttack;
+    [SerializeField] protected int defend;
+    [SerializeField] protected int moveRange;
+    [SerializeField] protected int attackRange;
+ 
     public bool IsDead => currentHp <= 0;
     public int CurrentHp => currentHp;
     public int MaxHp => maxHp;
@@ -37,4 +44,11 @@ public class Entity : MonoBehaviour
     protected virtual void OnDamageTaken(int amount) { }
     protected virtual void OnHeal(int amount) { }
     protected virtual void Die() { }
+
+    public int PhysicalAttack => physicalAttack;
+    public int MagicAttack => magicAttack;
+    public int Defent => defend;
+    public int MoveRange => moveRange;
+    public int AttackRange => attackRange;
+
 }

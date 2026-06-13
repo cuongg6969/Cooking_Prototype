@@ -41,6 +41,38 @@ public struct OnEnemySpawned
     public Vector2 position;
 }
 
+//── Turn-Base ─────────────────────────────────────────
+public struct OnTurnStarted
+{
+    public TurnOwner owner;
+}
+public struct OnTurnEnded
+{
+    public TurnOwner owner;
+}
+public struct OnEntityMoved
+{
+    public string entityId; public Vector2Int from;
+    public Vector2Int to;
+}
+public struct OnCombatStarted
+{
+    public bool isBossFight;
+}
+public struct OnCombatEnded
+{
+    public bool playerWon;
+}
+public struct OnBossPhaseChanged
+{
+    public int newPhase;
+}
+public struct OnAllyJoined
+{
+    public AllySO ally;
+}
+
+
 //── Cooking ─────────────────────────────────────────
 public struct OnDishCompleted
 {

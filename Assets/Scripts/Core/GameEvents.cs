@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 // ── Player ──────────────────────────────────────────
 public struct OnPlayerHpChanged
@@ -31,16 +30,22 @@ public struct OnPlayerDamaged
     public ElementType source;
 }
 
-//public struct OnSkillActivated
-//{
-//    public SkillSO skill;
-//}
+public struct OnSkillActivated
+{
+    public SkillSO skill;
+}
+public struct OnPlayerDied { }
+public struct OnEnemySpawned
+{
+    public string enemyId;
+    public Vector2 position;
+}
 
-// ── Cooking ─────────────────────────────────────────
-//public struct OnDishCompleted
-//{
-//    public DishResult result;
-//}
+//── Cooking ─────────────────────────────────────────
+public struct OnDishCompleted
+{
+    public DishResult result;
+}
 
 public struct OnCookingStepPassed
 {
@@ -51,6 +56,15 @@ public struct OnCookingStepPassed
 public struct OnCookingFailed
 {
     public string reason;
+}
+
+public struct OnCookingStarted
+{
+    public RecipeSO recipe;
+}
+public struct OnDishAdded
+{
+    public DishResult result;
 }
 
 // ── Inventory ───────────────────────────────────────
@@ -64,6 +78,10 @@ public struct OnItemAdded
     public string itemId;
 }
 
+public struct OnItemRemoved
+{
+    public string itemId;
+}
 // ── Restaurant ──────────────────────────────────────
 public struct OnCustomerArrived
 {
@@ -88,8 +106,8 @@ public struct OnGameStateChanged
 }
 
 // ── Mediapipe ───────────────────────────────────────
-//public struct OnGestureDetected
-//{
-//    public GestureType gestureType;
-//    public float confidence;
-//}
+public struct OnGestureDetected
+{
+    public GestureType gestureType;
+    public float confidence;
+}
